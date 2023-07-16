@@ -16,7 +16,7 @@ object ParallelIOExample extends IOApp.Simple{
   val computation2:IO[Int] = IO.delay(Thread.sleep(1000)) >> IO.delay(printAndPure(42))
 
 
-  val combinedComputation = (computation1,computation2).parMapN((a,b)=>{
+  val combinedComputation = (computation1,computation2).mapN((a,b)=>{
     val sum = a+b
     printAndPure(sum)
     sum

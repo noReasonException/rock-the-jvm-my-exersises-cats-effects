@@ -13,6 +13,10 @@ object TraverseExercises extends IOApp.Simple{
 
   def parSequence[A](ios:List[IO[A]]):IO[List[A]] = ios.parTraverse(identity)
   def parSequence2[C[_]:Traverse,A](ios:C[IO[A]]):IO[C[A]] = ios.parTraverse(identity)
+
+
+
+
   def parSequence3[F[_]:Parallel,C[_]:Traverse,A](in:C[F[A]]):F[C[A]] = in.parTraverse(identity)
 
 
