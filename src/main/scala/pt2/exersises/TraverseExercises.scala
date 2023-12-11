@@ -1,9 +1,9 @@
-package pt2
+package pt2.exersises
 
-import cats.{Parallel, Traverse}
-import cats.effect.{Async, IO, IOApp, Sync}
-import cats.syntax.traverse._
+import cats.effect.{IO, IOApp, Sync}
 import cats.syntax.parallel._
+import cats.syntax.traverse._
+import cats.{Parallel, Traverse}
 object TraverseExercises extends IOApp.Simple{
 
   def sequence[A](ios:List[IO[A]]):IO[List[A]] = ios.traverse(identity)

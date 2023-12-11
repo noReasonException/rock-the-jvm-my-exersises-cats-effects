@@ -1,4 +1,4 @@
-package pt2
+package pt2.exersises
 
 import cats.Parallel
 import cats.effect.{IO, IOApp}
