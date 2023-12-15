@@ -1,4 +1,0 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/stefanosstefanou/Desktop/repos/rock-the-jvm-my-exersises-cats-effects/src/main/scala/pt2/fibers/FibersExercises.scala:51:10: a pure expression does nothing in statement position[0m
-[0m[[0m[33mwarn[0m] [0m[0m  }yield converted[0m
-[0m[[0m[33mwarn[0m] [0m[0m         ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
