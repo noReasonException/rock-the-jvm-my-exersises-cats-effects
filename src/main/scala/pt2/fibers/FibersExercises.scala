@@ -1,27 +1,21 @@
 package pt2.fibers
 
-import cats.effect.kernel.Outcome
+import cats.effect.Outcome
 import cats.effect.{IO, IOApp}
 import cats.implicits.catsSyntaxTuple2Semigroupal
-import common.CommonExtensionMethods.IODebugOps
+import common.CommonExtensionMethods.{FibOutcomeOps, IODebugOps}
 
 import scala.concurrent.duration.FiniteDuration
 
 object FibersExercises extends IOApp.Simple{
 
 
-  private def fibToIo[A](outcome:Outcome[IO,Throwable,A]):IO[A] = outcome match {
-    case Outcome.Succeeded(fa) => fa
-    case Outcome.Errored(e) => IO.raiseError(new Throwable(e.toString))
-    case Outcome.Canceled() => IO.raiseError(new Throwable("Cancelled"))
-  }
-
 
   //Exercise 1
   def onAnotherThread[A](io:IO[A]):IO[A] = for{
     fibA <- io.start
     result <- fibA.join
-    converted <- fibToIo(result)
+    converted <- result.toIO
   }yield converted
 
   //Exercise 2
@@ -47,7 +41,7 @@ object FibersExercises extends IOApp.Simple{
     fiba <- ioa.start
     _ <- (IO.sleep(timeout) >> fiba.cancel).start
     result <- fiba.join
-    converted <- fibToIo(result)
+    converted <- result.toIO
   }yield converted
   override def run: IO[Unit] = onAnotherThread(IO.println("Hello world").myDebug()).myDebug()
 }
