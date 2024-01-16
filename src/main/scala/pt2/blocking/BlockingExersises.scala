@@ -53,6 +53,8 @@ object BlockingExersises extends IOApp.Simple {
     } yield ()
 
   /**
+    * Remember, IO.blocking pushes to a different thread pool in order not to starve the main thread pool
+    * Semantic blocking is now disabled
     * [io-compute-blocker-2] NonBlockingComputation 1
     * [io-compute-blocker-6] NonBlockingComputation 2
     */
@@ -95,8 +97,9 @@ object BlockingExersises extends IOApp.Simple {
   def someComputationsCede =
     for {
       _ <- IO("NonBlockingComputation 1").myDebug()
-      _ <- IO.cede
+      _ <- IO.cede //manually give off control, applies to both blocking and non-blocking ops
       _ <- IO("NonBlockingComputation 2").myDebug()
+      _ <- IO.cede //manually give off control, applies to both blocking and non-blocking ops
       _ <- IO("NonBlockingComputation 3").myDebug()
     } yield ()
 
